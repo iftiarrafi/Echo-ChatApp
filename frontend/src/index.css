@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --background: 222 25% 18%; /* Lightened from 11% */
+  --foreground: 210 40% 98%;
+  --card: 222 25% 22%; /* Lightened from 13% */
+  --card-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 25%;
+  --input: 217.2 32.6% 25%;
+  --ring: 224.3 76.3% 48%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  letter-spacing: -0.01em;
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-lg;
+  }
+
+  .glass-dark {
+    @apply bg-black/20 backdrop-blur-2xl border border-white/5 shadow-xl;
+  }
+
+  .btn-primary {
+    @apply px-5 py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:shadow-blue-500/20 shadow-md text-sm;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 text-white placeholder-white/20 font-medium text-sm;
+  }
+
+  .avatar-instagram {
+    @apply rounded-full border border-transparent bg-origin-border bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-[1.5px];
+  }
+  
+  .text-minimal {
+    @apply text-xs font-medium tracking-tight text-white/70;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
