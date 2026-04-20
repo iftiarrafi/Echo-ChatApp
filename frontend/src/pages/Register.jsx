@@ -31,88 +31,119 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center overflow-hidden bg-background">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#000000] text-sm py-8">
       <Helmet>
-        <title>Register | Joro Chat App</title>
-        <meta name="description" content="Initialize your frequency. Create a new account on Joro secure chat app." />
+        <title>Echo • Sign up</title>
+        <meta name="description" content="Create a new account on Echo." />
       </Helmet>
 
-      {/* Background Decorative Elements */}
-      <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-600/5 rounded-full blur-[120px]"></div>
-      <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600/5 rounded-full blur-[100px]"></div>
+      <div className="w-full max-w-[350px] flex flex-col items-center mt-2">
+        {/* Main Register Box */}
+        <div className="w-full bg-[#000000] sm:bg-black border-none sm:border border-[#363636] pb-6 pt-10 px-10 mb-3 flex flex-col items-center text-center">
 
-      <div className="relative z-10 w-full max-w-sm px-6">
-        <div className="glass-dark p-8 rounded-[2rem] backdrop-blur-3xl border border-white/5">
-          <div className="text-center mb-10">
-            <div className="w-14 h-14 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center shadow-xl mx-auto mb-6 transform hover:-rotate-6 transition-transform duration-500 ring-1 ring-white/10">
-              <span className="text-white font-bold text-2xl tracking-tighter">E</span>
-            </div>
-            <h2 className="text-3xl font-bold text-white mb-2 tracking-tight uppercase ">
-              Join Echo
-            </h2>
-            <p className="text-white/30 text-[10px] font-bold uppercase tracking-widest">
-              Initialize Your Frequency
-            </p>
+          {/* Logo */}
+          <div className="mb-4 mt-2">
+            <h1
+              className="text-4xl font-semibold text-white tracking-widest italic"
+              style={{ fontFamily: 'Georgia, serif' }}
+            >
+              Echo
+            </h1>
+          </div>
+
+          <p className="text-gray-400 font-semibold text-[15px] mb-6 leading-5">
+            Sign up to connect with your friends.
+          </p>
+
+
+
+          {/* Divider */}
+          <div className="flex w-full items-center mb-5">
+            <div className="h-px bg-[#363636] flex-1"></div>
+            <span className="text-[#A8A8A8] text-[13px] font-semibold px-4 uppercase">OR</span>
+            <div className="h-px bg-[#363636] flex-1"></div>
           </div>
 
           {message && (
-            <div className={`p-5 rounded-2xl mb-8 text-center backdrop-blur-md ${message.includes("exists") || message.includes("wrong")
-              ? "bg-red-500/5 border border-red-500/10 text-red-400"
-              : "bg-green-500/5 border border-green-500/10 text-green-400"
-              }`}>
-              <p className="text-[10px] font-black uppercase tracking-widest">{message}</p>
+            <div className="w-full mb-4 text-center">
+              <p className={`text-sm ${message.includes("exists") || message.includes("wrong") || message.includes("failed") ? "text-red-500" : "text-green-500"}`}>
+                {message}
+              </p>
             </div>
           )}
 
-          <form onSubmit={handleRegister} className="space-y-6">
-            <div className="space-y-3">
-              <label className="block text-[10px] font-black text-white/20 uppercase tracking-[0.3em] ml-2">Username</label>
+          {/* Form */}
+          <form className="w-full flex flex-col" onSubmit={handleRegister}>
+            <div className="relative mb-2">
               <input
                 type="text"
-                placeholder="CHOOSE IDENTIFICATION"
-                className="input-field"
+                placeholder="Username"
+                className="w-full bg-[#121212] flex items-center text-xs placeholder-gray-400 text-gray-100 border border-[#363636] focus:border-gray-500 rounded-[3px] px-2 pt-2.5 pb-2 focus:outline-none"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
               />
             </div>
 
-            <div className="space-y-3">
-              <label className="block text-[10px] font-black text-white/20 uppercase tracking-[0.3em] ml-2">Password</label>
+            <div className="relative mb-2">
               <input
                 type="password"
-                placeholder="••••••••"
-                className="input-field"
+                placeholder="Password"
+                className="w-full bg-[#121212] flex items-center text-xs placeholder-gray-400 text-gray-100 border border-[#363636] focus:border-gray-500 rounded-[3px] px-2 pt-2.5 pb-2 focus:outline-none"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
 
+            <p className="text-[11px] text-gray-400 mt-3 mb-4 leading-4">
+              People who use our service may have uploaded your contact information to Echo. <a href="#" className="text-gray-300">Learn More</a>
+              <br /><br />
+              By signing up, you agree to our <a href="#" className="text-gray-300">Terms</a>, <a href="#" className="text-gray-300">Privacy Policy</a> and <a href="#" className="text-gray-300">Cookies Policy</a>.
+            </p>
+
             <button
               type="submit"
-              className="w-full btn-primary py-5 text-xs uppercase tracking-[0.3em] mt-4 shadow-blue-600/20"
-              disabled={loading}
+              disabled={loading || !username || password.length < 6}
+              className={`w-full text-white font-semibold flex justify-center items-center py-1.5 rounded-lg text-sm mt-1 transition-all 
+                ${loading || !username || password.length < 6 ? 'bg-[#0095f6]/70 cursor-not-allowed text-white/70' : 'bg-[#0095f6] hover:bg-[#1877f2]'}`}
             >
               {loading ? (
-                <span className="flex items-center justify-center gap-3">
-                  <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
-                  Initializing...
-                </span>
-              ) : "Begin Resonance"}
+                <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+              ) : "Sign up"}
             </button>
           </form>
+        </div>
 
-          <div className="mt-10 text-center pt-6 border-t border-white/5">
-            <p className="text-white/20 text-[9px] font-bold uppercase tracking-widest leading-loose">
-              Already Resonating? <br />
-              <Link to="/login" className="text-white hover:text-blue-400 transition-colors">
-                Return to Resonance
-              </Link>
-            </p>
+        {/* Login Box */}
+        <div className="w-full bg-[#000000] sm:bg-black border-none sm:border border-[#363636] py-5 flex items-center justify-center mb-4 text-center">
+          <p className="text-sm text-gray-100">
+            Have an account?{" "}
+            <Link to="/login" className="text-[#0095f6] font-semibold hover:text-white transition-colors">
+              Log in
+            </Link>
+          </p>
+        </div>
+
+        {/* Get the app section */}
+        <div className="mt-2 text-center w-full">
+          <p className="text-sm text-gray-100 mb-4">Get the app(Not available yet).</p>
+          <div className="flex justify-center gap-2">
+            <img
+              src="https://static.cdninstagram.com/rsrc.php/v3/yt/r/Yfc020c87j0.png"
+              alt="Get it on Google Play"
+              className="h-10 cursor-pointer"
+            />
+            <img
+              src="https://static.cdninstagram.com/rsrc.php/v3/yz/r/c5Rp7Ym-Klz.png"
+              alt="Get it from Microsoft"
+              className="h-10 cursor-pointer"
+            />
           </div>
         </div>
       </div>
+
+
     </div>
   );
 };

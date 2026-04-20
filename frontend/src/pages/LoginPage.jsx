@@ -23,102 +23,107 @@ const Login = () => {
   }, [status, navigate]);
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center overflow-hidden bg-background">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#000000] text-sm">
       <Helmet>
-        <title>Login | Joro Chat App</title>
-        <meta name="description" content="Return to your resonance. Securely login to your Joro account." />
+        <title>Echo • Login</title>
+        <meta name="description" content="Log in to Echo." />
       </Helmet>
 
-      {/* Background Decorative Elements */}
-      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/5 rounded-full blur-[120px]"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/5 rounded-full blur-[100px]"></div>
+      <div className="w-full max-w-[350px] flex flex-col items-center mt-8">
+        {/* Main Login Box */}
+        <div className="w-full bg-[#000000] sm:bg-black border-none sm:border border-[#363636] pb-6 pt-10 px-10 mb-3 flex flex-col items-center">
 
-      <div className="relative z-10 w-full max-w-sm px-6">
-        <div className="glass-dark p-8 rounded-[2rem] backdrop-blur-3xl border border-white/5">
-          <div className="text-center mb-10">
-            <div className="w-14 h-14 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center shadow-xl mx-auto mb-6 transform hover:rotate-6 transition-transform duration-500 ring-1 ring-white/10">
-              <span className="text-white font-bold text-2xl tracking-tighter">E</span>
-            </div>
-            <h2 className="text-3xl font-bold text-white mb-2 tracking-tight uppercase ">
+          {/* Logo */}
+          <div className="mb-10 mt-2">
+            <h1
+              className="text-4xl font-semibold text-white tracking-widest italic"
+              style={{ fontFamily: 'Georgia, serif' }}
+            >
               Echo
-            </h2>
-            <p className="text-white/30 text-[10px] font-bold uppercase tracking-widest">
-              Return to Resonance
-            </p>
+            </h1>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-3">
-              <label
-                htmlFor="username"
-                className="block text-[10px] font-black text-white/20 uppercase tracking-[0.3em] ml-2"
-              >
-                Identification
-              </label>
+          {/* Form */}
+          <form className="w-full flex flex-col" onSubmit={handleSubmit}>
+            <div className="relative mb-2">
               <input
                 type="text"
-                id="username"
-                placeholder="USERNAME"
+                placeholder="Phone number, username, or email"
+                className="w-full bg-[#121212] flex items-center text-xs placeholder-gray-400 text-gray-100 border border-[#363636] focus:border-gray-500 rounded-[3px] px-2 pt-2.5 pb-2 focus:outline-none"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                className="input-field"
               />
             </div>
 
-            <div className="space-y-3">
-              <label
-                htmlFor="password"
-                className="block text-[10px] font-black text-white/20 uppercase tracking-[0.3em] ml-2"
-              >
-                Access Code
-              </label>
+            <div className="relative mb-4">
               <input
                 type="password"
-                id="password"
-                placeholder="••••••••"
+                placeholder="Password"
+                className="w-full bg-[#121212] flex items-center text-xs placeholder-gray-400 text-gray-100 border border-[#363636] focus:border-gray-500 rounded-[3px] px-2 pt-2.5 pb-2 focus:outline-none"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="input-field"
               />
             </div>
 
             {error && (
-              <div className="bg-red-500/10 border border-red-500/10 p-4 rounded-2xl">
-                <p className="text-[10px] text-red-400 text-center font-black uppercase tracking-widest">
-                  {error || "Verification Failed"}
-                </p>
+              <div className="mb-4 text-center">
+                <p className="text-red-500 text-sm">{error || "Sorry, your password was incorrect. Please double-check your password."}</p>
               </div>
             )}
 
             <button
               type="submit"
-              disabled={loading}
-              className="w-full btn-primary py-5 text-xs uppercase tracking-[0.3em] mt-4 shadow-blue-600/20"
+              disabled={loading || !username || password.length < 6}
+              className={`w-full text-white font-semibold flex justify-center items-center py-1.5 rounded-lg text-sm mt-1 transition-all 
+                ${loading || !username || password.length < 6 ? 'bg-[#0095f6]/70 cursor-not-allowed text-white/70' : 'bg-[#0095f6] hover:bg-[#1877f2]'}`}
             >
               {loading ? (
-                <span className="flex items-center justify-center gap-3">
-                  <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
-                  Verifying...
-                </span>
-              ) : "Enter Resonance"}
+                <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+              ) : "Log in"}
             </button>
           </form>
 
-          <div className="mt-10 text-center pt-6 border-t border-white/5">
-            <p className="text-white/20 text-[9px] font-bold uppercase tracking-widest leading-loose">
-              New to the Echo? <br />
-              <Link
-                to="/register"
-                className="text-white hover:text-blue-400 transition-colors"
-              >
-                Start Your Frequency
-              </Link>
-            </p>
+          {/* Divider */}
+          <div className="flex w-full items-center mt-5 mb-5">
+            <div className="h-px bg-[#363636] flex-1"></div>
+            <span className="text-[#A8A8A8] text-[13px] font-semibold px-4 uppercase">OR</span>
+            <div className="h-px bg-[#363636] flex-1"></div>
+          </div>
+
+
+        </div>
+
+        {/* Signup Box */}
+        <div className="w-full bg-[#000000] sm:bg-black border-none sm:border border-[#363636] py-5 flex items-center justify-center mb-4">
+          <p className="text-sm text-gray-100">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-[#0095f6] font-semibold hover:text-white transition-colors">
+              Sign up
+            </Link>
+          </p>
+        </div>
+
+        {/* Get the app section */}
+        <div className="mt-2 text-center w-full">
+          <p className="text-sm text-gray-100 mb-4">Get the app.(Not available yet)</p>
+          <div className="flex justify-center gap-2">
+            <img
+              src="https://static.cdninstagram.com/rsrc.php/v3/yt/r/Yfc020c87j0.png"
+              alt="Get it on Google Play"
+              className="h-10 cursor-pointer"
+            />
+            <img
+              src="https://static.cdninstagram.com/rsrc.php/v3/yz/r/c5Rp7Ym-Klz.png"
+              alt="Get it from Microsoft"
+              className="h-10 cursor-pointer"
+            />
           </div>
         </div>
       </div>
+
+
     </div>
   );
 };

@@ -3,30 +3,20 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
-        <footer className="bg-black/20 backdrop-blur-xl border-t border-white/5 py-16">
-            <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12">
-                <div className="flex items-center gap-3">
-                    {/* <div className="w-9 h-9 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <span className="text-white font-black text-lg tracking-tighter">E</span>
-                    </div> */}
-                    <span className="text-2xl font-black tracking-tighter text-white uppercase italic">Echo</span>
-                </div>
-
-                <div className="flex space-x-12">
-                    {['About', 'Contact', 'Privacy'].map((item) => (
-                        <Link
-                            key={item}
-                            to={`/${item.toLowerCase()}`}
-                            className="text-white/30 hover:text-white transition-all duration-300 text-xs font-bold uppercase tracking-[0.2em] hover:tracking-[0.25em]"
-                        >
-                            {item}
-                        </Link>
-                    ))}
-                </div>
-
-                <p className="text-white/10 text-[10px] font-slate-400 uppercase tracking-[0.3em]">
-                    © 2025 Echo. Defined by Sound.
-                </p>
+        <footer className="w-full bg-[#000000] text-xs text-[#737373] pb-10 pt-12 flex flex-col items-center border-t border-[#333]">
+            <div className="flex flex-wrap justify-center gap-4 px-6 mb-4 max-w-4xl">
+                <Link to="/about" className="hover:text-white transition-colors">About</Link>
+                <Link to="/help" className="hover:text-white transition-colors">Help</Link>
+                <Link to="/press" className="hover:text-white transition-colors">Press</Link>
+                <Link to="/api" className="hover:text-white transition-colors">API</Link>
+                <Link to="/jobs" className="hover:text-white transition-colors">Jobs</Link>
+                <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+                <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
+                <Link to="/locations" className="hover:text-white transition-colors">Locations</Link>
+                <span className="cursor-pointer hover:text-white transition-colors">Language</span>
+            </div>
+            <div className="flex gap-4 mt-2">
+                <span>© {new Date().getFullYear()} Echo.</span>
             </div>
         </footer>
     );
