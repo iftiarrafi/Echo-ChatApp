@@ -16,7 +16,7 @@
 > This project embraces a hyper-minimalist, sleek design framework inspired by modern app aesthetics, ensuring a distraction-free user experience.
 
 <div align="center">
-  <img src="../Echo/assets/home.png" alt="Echo Demo" width="800"/>
+  <img src="./assets/home.png" alt="Echo Demo" width="800"/>
   
 </div>
 
