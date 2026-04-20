@@ -16,8 +16,8 @@
 > This project embraces a hyper-minimalist, sleek design framework inspired by modern app aesthetics, ensuring a distraction-free user experience.
 
 <div align="center">
-  <img src="./docs/demo-placeholder.gif" alt="Echo Demo" width="800"/>
-  <p><i>(Placeholder: Insert stunning GIF or screenshot here)</i></p>
+  <img src="../Echo/assets/home.png" alt="Echo Demo" width="800"/>
+  
 </div>
 
 ## ✨ Key Features
@@ -30,7 +30,7 @@
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** React, React Router Dom, Redux Toolkit, Tailwind CSS (Vite via Rollup)
+- **Frontend:** React, React Router Dom, Redux Toolkit, Tailwind CSS 
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB
 - **Authentication:** JSON Web Tokens (JWT) & bcrypt
@@ -44,7 +44,7 @@ Get Echo running locally in less than two minutes.
 ### 1. Clone & Install Dependencies
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/Echo.git
+git clone https://github.com/iftiarrafi/Echo-ChatApp.git
 cd Echo
 
 # Install backend dependencies
@@ -54,17 +54,7 @@ cd backend && npm install
 cd ../frontend && npm install
 ```
 
-### 2. Configure Environment
-Copy the `.env.example` configurations to `.env` in both the `frontend` and `backend` directories. *See [Configuration](#-configuration) for the necessary keys.*
 
-### 3. Spin Up the Development Servers
-```bash
-# Terminal 1: Start Backend (from /backend)
-npm start
-
-# Terminal 2: Start Frontend (from /frontend)
-npm run start
-```
 > [!TIP]
 > The frontend typically runs on `http://localhost:5173/` while the server runs on `http://localhost:3001/`. Make sure both ports are free.
 
@@ -83,19 +73,6 @@ Set up these required variables in your root `/backend/.env` file:
 
 ---
 
-## 🤝 Contributing
-
-We love pull requests! If you'd like to improve Echo:
-
-1. **Fork** the repository
-2. **Create** your feature branch (`git checkout -b feature/AmazingFeature`)
-3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
-4. **Push** to the branch (`git push origin feature/AmazingFeature`)
-5. **Open** a Pull Request
-
-Please ensure your code formatting generally aligns with our ESLint configuration. 
-
----
 
 ## ⚖️ License
 
