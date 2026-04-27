@@ -60,6 +60,35 @@ cd ../frontend && npm install
 
 ---
 
+## 🐳 Docker
+
+The backend includes a **multistage Dockerfile** for optimized production builds.
+
+### Build & Run
+
+```bash
+# Build the image
+cd backend
+docker build -t echo-backend .
+
+# Run the container
+docker run -d \
+  --name echo-api \
+  -p 3001:3001 \
+  --env-file .env \
+  echo-backend
+```
+
+> [!NOTE]
+> The Dockerfile uses a two-stage build: the first stage installs all dependencies, the second stage copies only production dependencies onto a minimal `node:20-alpine` image — resulting in a significantly smaller final image. A non-root user is configured for security.
+
+| Stage | Purpose | Base Image |
+| ----- | ------- | ---------- |
+| `builder` | Install all dependencies | `node:20-alpine` |
+| `production` | Copy production deps & source, run app | `node:20-alpine` |
+
+---
+
 ## ⚙️ Configuration
 
 Set up these required variables in your root `/backend/.env` file:
