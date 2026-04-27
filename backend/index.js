@@ -12,6 +12,8 @@ import chatRoomModel from './models/chatroomModel.js';
 
 dotenv.config();
 
+import dns from 'dns'
+dns.setServers(["1.1.1.1", "8.8.8.8"])
 const app = express();
 const httpServer = createServer(app); // Create HTTP server
 const io = new Server(httpServer, {
