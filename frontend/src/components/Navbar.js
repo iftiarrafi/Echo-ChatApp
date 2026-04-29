@@ -16,9 +16,9 @@ const Navbar = () => {
 
     const handleLogout = () => {
         dispatch(logout());
-        localStorage.removeItem("userToken");
-        navigate("/login");
+        navigate("/");
     };
+
 
     const navLinks = [
         { name: 'Home', path: '/' },

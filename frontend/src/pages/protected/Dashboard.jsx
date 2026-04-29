@@ -45,30 +45,34 @@ const Dashboard = () => {
   }, [searchFriend]);
 
   return (
-    <div className="flex flex-col md:flex-row w-full h-screen bg-background text-white pt-20 overflow-hidden">
+    <div className="flex flex-col md:flex-row w-full h-screen bg-black text-white pt-16 overflow-hidden selection:bg-blue-500 selection:text-white">
       <Helmet>
-        <title>Dashboard | Joro Chat App</title>
-        <meta name="description" content="Access your Joro dashboard, search for friends, and start resonating." />
+        <title>Echo • Dashboard</title>
+        <meta name="description" content="Access your Echo dashboard and start connecting." />
       </Helmet>
+
+      {/* Subtle Ambient Backlight */}
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[150px] pointer-events-none z-0"></div>
+
       {/* Sidebar */}
-      <div className="w-full md:w-80 lg:w-96 border-r border-white/5 flex flex-col bg-black/10 backdrop-blur-2xl">
-        <div className="p-8 space-y-6">
-          <div className="relative">
-            <span className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="w-full md:w-80 lg:w-96 border-r border-[#1a1a1a] flex flex-col bg-black/40 backdrop-blur-xl z-10">
+        <div className="p-6 space-y-4">
+          <div className="relative group">
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </span>
             <input
               type="text"
-              placeholder="Search conversations..."
+              placeholder="SEARCH PEOPLE..."
               value={searchFriend}
               onChange={(e) => setSearchFriend(e.target.value)}
-              className="w-full pl-14 pr-6 py-4 bg-white/5 border border-white/5 rounded-[2rem] focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 placeholder-white/10 text-sm font-bold uppercase tracking-widest"
+              className="w-full pl-11 pr-4 py-3 bg-[#0a0a0a] border border-[#1a1a1a] rounded-xl focus:outline-none focus:border-blue-500/50 transition-all placeholder-gray-600 text-[10px] font-bold tracking-[0.2em] uppercase"
             />
             {searching && (
-              <div className="absolute right-5 top-1/2 -translate-y-1/2">
-                <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+              <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                <div className="w-3 h-3 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
               </div>
             )}
           </div>
@@ -76,69 +80,78 @@ const Dashboard = () => {
           {searchFriend && !searching && (
             <button
               onClick={() => setSearchFriend("")}
-              className="w-full py-2 text-[10px] font-black uppercase tracking-[0.3em] text-white/20 hover:text-blue-400 transition-colors"
+              className="w-full py-2 text-[9px] font-black uppercase tracking-[0.3em] text-gray-500 hover:text-white transition-colors"
             >
-              Close Results
+              Clear Results
             </button>
           )}
         </div>
 
-        <div className="flex-1 overflow-y-auto px-6 pb-12 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto px-4 pb-8 custom-scrollbar">
           {searchFriend ? (
-            <div className="space-y-2">
-              <p className="px-4 text-[10px] font-black text-white/10 uppercase tracking-[0.4em] mb-6">Discovery</p>
+            <div className="space-y-1">
+              <p className="px-4 text-[9px] font-black text-gray-600 uppercase tracking-[0.4em] mb-4">Discovery</p>
               {people.length > 0 ? (
                 people.map((person) => (
                   <button
                     key={person._id}
                     onClick={() => openChatroom(person._id)}
-                    className={`w-full flex items-center gap-5 p-4 rounded-[2rem] transition-all duration-500 group ${selected === person._id ? 'bg-blue-600 shadow-2xl shadow-blue-600/20' : 'hover:bg-white/5'
+                    className={`w-full flex items-center gap-4 p-3 rounded-2xl transition-all duration-300 group ${selected === person._id ? 'bg-[#1a1a1a] border border-[#333]' : 'hover:bg-[#0a0a0a] border border-transparent'
                       }`}
                   >
-                    <div className="avatar-instagram">
-                      <div className="w-12 h-12 rounded-full bg-slate-900 border-2 border-slate-950 flex items-center justify-center font-black text-white shadow-inner group-hover:scale-105 transition-transform duration-500 text-lg uppercase">
+                    <div className="relative">
+                      <div className="w-10 h-10 rounded-full bg-[#111] border border-[#222] flex items-center justify-center font-bold text-white group-hover:scale-105 transition-transform text-sm uppercase">
                         {person.username[0]}
                       </div>
+                      <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-black rounded-full"></div>
                     </div>
                     <div className="text-left overflow-hidden">
-                      <p className="font-black text-sm tracking-tight text-white mb-1 truncate">{person.username}</p>
-                      <p className={`text-[10px] font-bold uppercase tracking-widest leading-none ${selected === person._id ? 'text-white/70' : 'text-white/20'}`}>Active Now</p>
+                      <p className="font-bold text-sm tracking-tight text-white truncate">{person.username}</p>
+                      <p className={`text-[9px] font-bold uppercase tracking-widest leading-none ${selected === person._id ? 'text-blue-400' : 'text-gray-500'}`}>
+                        {selected === person._id ? 'Active Session' : 'Connect'}
+                      </p>
                     </div>
                   </button>
                 ))
               ) : (
-                <div className="text-center py-20">
-                  <p className="text-white/10 text-xs font-black uppercase tracking-[0.4em]">No resonances found</p>
+                <div className="text-center py-12">
+                  <p className="text-gray-600 text-[10px] font-bold uppercase tracking-[0.2em]">No results found</p>
                 </div>
               )}
             </div>
           ) : (
-            <div className="h-full flex flex-col items-center justify-center space-y-8 opacity-10">
-              <div className="text-8xl grayscale">🌟</div>
-              <p className="text-[10px] font-black uppercase tracking-[0.5em] text-center">Your Echo Awaits</p>
+            <div className="h-full flex flex-col items-center justify-center space-y-4 opacity-20">
+              <div className="w-12 h-12 rounded-2xl border border-gray-800 flex items-center justify-center text-xl grayscale">
+                ✨
+              </div>
+              <p className="text-[9px] font-black uppercase tracking-[0.4em] text-center">Your Echo Awaits</p>
             </div>
           )}
         </div>
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 relative flex flex-col min-w-0 bg-transparent">
+      <div className="flex-1 relative flex flex-col min-w-0 bg-transparent z-10">
         {selected ? (
           <Chatroom friendId={selected} />
         ) : (
-          <div className="h-full flex flex-col items-center justify-center text-center p-12 relative overflow-hidden">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none"></div>
-
-            <div className="relative mb-10 transform hover:rotate-6 transition-transform duration-1000">
-              <div className="absolute inset-0 bg-blue-600/5 blur-3xl rounded-full"></div>
-              <div className="relative w-24 h-24 bg-white/5 border border-white/5 rounded-3xl flex items-center justify-center text-4xl shadow-xl backdrop-blur-2xl">
-                🌊
+          <div className="h-full flex flex-col items-center justify-center text-center p-6 relative">
+            <div className="max-w-md space-y-6 relative">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-white/5 border border-white/10 rounded-[2.5rem] mb-4 rotate-3 hover:rotate-0 transition-transform duration-500">
+                <span className="text-4xl">🌊</span>
+              </div>
+              <h3 className="text-4xl md:text-5xl font-bold text-white tracking-tighter">
+                Start the Flow
+              </h3>
+              <p className="text-gray-400 font-medium text-sm md:text-base leading-relaxed">
+                Connect with the people you care about. Find your circle and start echoing across the network.
+              </p>
+              <div className="pt-4">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-[#111] border border-[#222] text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">
+                  Select a contact to begin
+                </div>
               </div>
             </div>
-            <h3 className="text-4xl font-bold text-white mb-4 tracking-tight">Start the Flow</h3>
-            <p className="text-white/20 max-w-[280px] mx-auto font-semibold uppercase tracking-widest text-[10px] leading-relaxed">
-              Every connection begins with a simple search. Find your circle and start echoing.
-            </p>
           </div>
         )}
       </div>
@@ -147,3 +160,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+

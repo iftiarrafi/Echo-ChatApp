@@ -9,8 +9,10 @@ import userRouter from './routes/userRoutes.js';
 import chatroomRouter from './routes/chatRoomRoutes.js';
 import messageModel from './models/messageModel.js';
 import chatRoomModel from './models/chatroomModel.js';
+import redisClient from './config/redisClient.js';
 
 dotenv.config();
+
 
 import dns from 'dns'
 dns.setServers(["1.1.1.1", "8.8.8.8"])

@@ -4,7 +4,7 @@
 
   ![Build Status](https://img.shields.io/badge/build-passing-brightgreen?style=flat-square)
   ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)
-  ![Version](https://img.shields.io/badge/version-v1.0.0-orange?style=flat-square)
+  ![Version](https://img.shields.io/badge/version-v1.1.0-orange?style=flat-square)
   ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)
 </div>
 
@@ -13,95 +13,99 @@
 ## 📸 Overview
 
 > [!NOTE] 
-> This project embraces a hyper-minimalist, sleek design framework inspired by modern app aesthetics, ensuring a distraction-free user experience.
+> This project is optimized with Redis for lightning-fast authentication with Docker,without redis , the mongodb server will face more traffic and will be slower. It also embraces a minimalist, sleek design framework inspired by modern app aesthetics, ensuring a distraction-free user experience. 
 
 <div align="center">
   <img src="./assets/intro.gif" alt="Echo Demo" width="800"/>
-  
 </div>
 
 ## ✨ Key Features
 
 - **Real-Time Synergy:** Instant messaging capabilities powered by WebSockets.
+- **Redis Caching:** High-performance login flow with user data cached in Redis to minimize database latency.
 - **Sleek Aesthetic:** Pixel-perfect dark-mode UI customized via Tailwind CSS utility classes.
 - **State Management:** Highly predictable client-side state handling via Redux Toolkit.
 - **Secure Authentication:** Robust JWT-based authentication system preventing unauthorized data access.
-- **Modern Architecture:** Built on the reliable MERN stack for scalable, enterprise-grade application deployment.
+- **Containerized Orchestration:** Seamless deployment using Docker and Docker Compose.
 
 ## 🛠️ Tech Stack
 
 - **Frontend:** React, React Router Dom, Redux Toolkit, Tailwind CSS 
 - **Backend:** Node.js, Express.js
-- **Database:** MongoDB
+- **Database:** MongoDB (Atlas)
+- **Cache:** Redis (v7+)
 - **Authentication:** JSON Web Tokens (JWT) & bcrypt
 
 ---
 
 ## 🚀 Quick Start
 
-Get Echo running locally in less than two minutes.
+The easiest way to run Echo is using Docker Compose.
 
-### 1. Clone & Install Dependencies
+### 1. Using Docker Compose (Recommended)
 ```bash
 # Clone the repository
 git clone https://github.com/iftiarrafi/Echo-ChatApp.git
 cd Echo
 
+# Start the stack (Backend + Redis)
+docker-compose up --build
+```
+
+### 2. Manual Installation
+If you prefer running the components individually:
+```bash
 # Install backend dependencies
 cd backend && npm install
 
 # Install frontend dependencies
 cd ../frontend && npm install
+
+# Run the backend (Requires local Redis & MongoDB connection)
+cd ../backend && npm start
+
+# Run the frontend
+cd ../frontend && npm start
 ```
-
-
-> [!TIP]
-> The frontend typically runs on `http://localhost:5173/` while the server runs on `http://localhost:3001/`. Make sure both ports are free.
 
 ---
 
-## 🐳 Docker
+## ⚡ Redis Implementation
 
-The backend includes a **multistage Dockerfile** for optimized production builds.
+Echo uses Redis to cache user login information for **1 hour**. 
 
-### Build & Run
+- **Cache-First Strategy**: Upon login, the system checks Redis for user credentials before querying MongoDB.
+- **Performance**: Reduces database load and speeds up authentication response times.
+- **Automatic Expiry**: Cached user data and JWT tokens both expire after 1 hour to ensure security and data consistency.
 
-```bash
-# Build the image
-cd backend
-docker build -t echo-backend .
+---
 
-# Run the container
-docker run -d \
-  --name echo-api \
-  -p 3001:3001 \
-  --env-file .env \
-  echo-backend
-```
+## 🐳 Docker Orchestration
 
-> [!NOTE]
-> The Dockerfile uses a two-stage build: the first stage installs all dependencies, the second stage copies only production dependencies onto a minimal `node:20-alpine` image — resulting in a significantly smaller final image. A non-root user is configured for security.
+Echo is fully containerized. The `docker-compose.yml` file orchestrates the following services:
 
-| Stage | Purpose | Base Image |
-| ----- | ------- | ---------- |
-| `builder` | Install all dependencies | `node:20-alpine` |
-| `production` | Copy production deps & source, run app | `node:20-alpine` |
+| Service | Image | Internal Port | External Port |
+| ------- | ----- | ------------- | ------------- |
+| `backend` | Custom Node.js (Alpine) | `3001` | `3001` |
+| `redis` | `redis:7-alpine` | `6379` | `6379` |
+
+> [!TIP]
+> To run the backend in the background, use `docker-compose up -d`.
 
 ---
 
 ## ⚙️ Configuration
 
-Set up these required variables in your root `/backend/.env` file:
+Set up these required variables in your `/backend/.env` file:
 
 | Variable | Description | Example / Default |
 | -------- | ----------- | ----------------- |
 | `PORT` | API Server Port | `3001` |
-| `MONGO_URI` | MongoDB Connection String | `mongodb+srv://...` |
+| `MONGODB_URL` | MongoDB Connection String | `mongodb+srv://...` |
+| `REDIS_URL` | Redis Connection String | `redis://redis:6379` |
 | `JWT_SECRET` | Secret key for JWT hashing | `your_super_secret_key` |
-| `NODE_ENV` | Application Environment | `development` |
 
 ---
-
 
 ## ⚖️ License
 

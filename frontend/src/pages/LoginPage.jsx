@@ -9,7 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error, status } = useSelector((state) => state.login);
+  const { loading, error, status, token } = useSelector((state) => state.login);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,10 +17,10 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (status === "success" || localStorage.getItem("userToken")) {
+    if (status === "succeeded" || token) {
       navigate("/auth/dashboard");
     }
-  }, [status, navigate]);
+  }, [status, token, navigate]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#000000] text-sm">

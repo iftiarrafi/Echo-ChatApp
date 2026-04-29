@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useSelector } from "react-redux";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -9,6 +10,14 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+  const { token } = useSelector((state) => state.login);
+
+  React.useEffect(() => {
+    if (token || localStorage.getItem("userToken")) {
+      navigate("/auth/dashboard");
+    }
+  }, [token, navigate]);
+
 
   const handleRegister = async (e) => {
     e.preventDefault();
