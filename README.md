@@ -15,8 +15,16 @@
 > [!NOTE] 
 > This project is optimized with Redis for lightning-fast authentication with Docker,without redis , the mongodb server will face more traffic and will be slower. It also embraces a minimalist, sleek design framework inspired by modern app aesthetics, ensuring a distraction-free user experience. 
 
+<!-- Visuals -->
+
+🎥 Project Demo
+
 <div align="center">
-  <img src="./assets/intro.gif" alt="Echo Demo" width="800"/>
+
+<a href="https://youtu.be/49-qr4b13Pw"> <img src="https://img.youtube.com/vi/49-qr4b13Pw/maxresdefault.jpg" alt="Echo Chat Application Demo" width="800" /> </a>
+
+<p> <strong>▶️ Click the image above to watch the full demo</strong> </p>
+
 </div>
 
 ## ✨ Key Features
