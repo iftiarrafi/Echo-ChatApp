@@ -8,13 +8,6 @@
   ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)
 </div>
 
----
-
-## 📸 Overview
-
-> [!NOTE] 
-> This project is optimized with Redis for lightning-fast authentication with Docker,without redis , the mongodb server will face more traffic and will be slower. It also embraces a minimalist, sleek design framework inspired by modern app aesthetics, ensuring a distraction-free user experience. 
-
 <!-- Visuals -->
 
 🎥 Project Demo
@@ -26,6 +19,13 @@
 <p> <strong>▶️ Click the image above to watch the full demo</strong> </p>
 
 </div>
+
+## 📸 Overview
+
+> [!NOTE] 
+> This project is optimized with Redis for lightning-fast authentication with Docker,without redis , the mongodb server will face more traffic and will be slower. It also embraces a minimalist, sleek design framework inspired by modern app aesthetics, ensuring a distraction-free user experience. 
+
+
 
 ## ✨ Key Features
 
